@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Souilah Meryem — Portfolio</title>
+<meta name="description" content="Meryem Souilah — élève ingénieure en Sciences de l'Information Géographique à l'EHTP. SIG, Geo-BI, développement full-stack et IA.">
+<meta property="og:title" content="Souilah Meryem — Ingénieure SIG & Développement">
+<meta property="og:description" content="SIG, Spatial Data & Geo-BI, développement full-stack et IA. Projets, expériences et compétences.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://meryem-souilah.github.io/My-Portfolio/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300b4a0'/><text x='16' y='22' font-size='16' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>MS</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -348,6 +354,34 @@
   .project-title { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.3; }
   .project-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.65; flex: 1; }
   .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+  .project-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(0,180,160,0.08);
+    border: 1px solid rgba(0,180,160,0.3);
+    color: var(--neon);
+  }
+  .project-badge.live { background: rgba(255,61,127,0.07); border-color: rgba(255,61,127,0.3); color: var(--neon3); }
+  .project-card.featured { border-color: rgba(0,180,160,0.35); }
+  .project-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
+  .project-list li { font-size: 0.84rem; color: var(--muted); line-height: 1.55; padding-left: 1.1rem; position: relative; }
+  .project-list li::before { content: '▹'; position: absolute; left: 0; color: var(--neon); }
+  .project-links { display: flex; gap: 1rem; }
+  .project-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--neon2);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .project-link:hover { border-color: var(--neon2); }
   .stack-tag {
     font-family: 'Space Mono', monospace;
     font-size: 0.6rem;
@@ -408,6 +442,11 @@
   .edu-year { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--neon); letter-spacing: 0.15em; margin-bottom: 0.6rem; }
   .edu-degree { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.35; }
   .edu-school { font-size: 0.82rem; color: var(--muted); }
+  .edu-topics { margin-top: 0.9rem; font-size: 0.78rem; color: var(--muted); line-height: 1.6; border-top: 1px dashed var(--border); padding-top: 0.8rem; }
+  .skill-tag.progress { border-style: dashed; }
+  .skill-tag.progress::after { content: ' · en cours'; color: var(--neon); }
+  .soft-skills { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+  .soft-skills-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--neon); letter-spacing: 0.2em; text-transform: uppercase; margin-right: 0.6rem; }
 
   /* CONTACT */
   .contact-inner { max-width: 680px; margin: 0 auto; text-align: center; }
@@ -444,9 +483,16 @@
   }
 
   @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    nav ul { gap: 1rem; }
-    nav a { font-size: 0.7rem; }
+    nav { padding: 0.8rem 1rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    nav ul { gap: 1.1rem; overflow-x: auto; max-width: 100%; padding-bottom: 0.2rem; scrollbar-width: none; }
+    nav ul::-webkit-scrollbar { display: none; }
+    nav a { font-size: 0.68rem; white-space: nowrap; }
+    .hero { padding-top: 7rem; }
+    .about-info-cards { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .timeline { padding-left: 1.6rem; }
+    .timeline-dot { left: -2.05rem; }
+    .timeline-item { padding: 1.4rem; }
     .hero { padding: 5rem 1.5rem 3rem; min-height: auto; }
     section { padding: 4rem 1.5rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -461,9 +507,10 @@
   <div class="nav-logo">SOUILAH MERYEM<span>.portfolio</span></div>
   <ul>
     <li><a href="#apropos">À propos</a></li>
-    <li><a href="#competences">Compétences</a></li>
-    <li><a href="#projets">Projets</a></li>
     <li><a href="#experience">Expérience</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#formation">Formation</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -476,31 +523,35 @@
   <div class="geo geo3"></div>
 
   <div class="hero-content">
-    <div class="hero-tag">Disponible pour un stage d'été 2026</div>
+    <div class="hero-tag">PFE de 6 mois · disponible dès février 2027</div>
     <h1>
       <span class="name">Souilah</span><br>
       <span class="name2">Meryem</span>
     </h1>
     <p class="hero-desc">
-      Étudiante Ingénieure en <strong>Sciences de l'Information Géographique</strong> à l'EHTP Casablanca.
-      Passionnée par l'analyse spatiale, les SIG, le développement applicatif et l'Intelligence Artificielle.
+      Élève ingénieure en <strong>Sciences de l'Information Géographique</strong> à l'EHTP Casablanca.
+      Je conçois des solutions qui relient <strong>SIG</strong>, <strong>Spatial Data &amp; Geo-BI</strong>, développement full-stack et intelligence artificielle.
     </p>
     <div class="hero-actions">
       <a href="#projets" class="btn btn-primary">Voir mes projets</a>
-      <a href="CV_Souilah_Meryem .pdf" class="btn btn-ghost" target="_blank">Voir mon CV</a>
+      <a href="#contact" class="btn btn-ghost">Me contacter</a>
     </div>
     <div class="hero-stats">
       <div class="stat-item">
-        <div class="stat-num">5+</div>
-        <div class="stat-label">Projets académiques</div>
+        <div class="stat-num">2</div>
+        <div class="stat-label">Stages en entreprise</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Projets réalisés</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Technologies</div>
       </div>
       <div class="stat-item">
         <div class="stat-num">3</div>
-        <div class="stat-label">Langues maîtrisées</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">15+</div>
-        <div class="stat-label">Technologies</div>
+        <div class="stat-label">Langues</div>
       </div>
     </div>
   </div>
@@ -511,13 +562,13 @@
   <h2 class="section-title">Qui suis-<span>je</span> ?</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>Étudiante en cycle d'ingénierie à l'<strong>École Hassania des Travaux Publics</strong> depuis 2024, je me spécialise dans les Sciences de l'Information Géographique avec une forte appétence pour le développement logiciel et la data science spatiale.</p>
-      <p>Issue des Classes Préparatoires MPSI/MP, j'allie rigueur mathématique et curiosité technologique pour concevoir des solutions alliant SIG, développement web et l'intelligence artificielle.</p>
-      <p>Je recherche activement un <strong style="color:var(--neon)">stage d'été 2026</strong> pour mettre en pratique mes compétences sur des projets concrets et innovants.</p>
+      <p>Élève en cycle d'ingénieur à l'<strong>École Hassania des Travaux Publics</strong> depuis 2024, je me spécialise en Sciences de l'Information Géographique : data science spatiale, bases de données, architecture des systèmes d'information et analyse spatiale.</p>
+      <p>Issue des Classes Préparatoires MPSI/MP, j'allie rigueur mathématique et sens du concret. Mes deux stages m'ont permis de livrer de bout en bout une application desktop Python et une plateforme web full-stack intégrant des données SIG.</p>
+      <p>Je m'intéresse particulièrement à la <strong style="color:var(--neon)">Geo-BI</strong>, à la <strong style="color:var(--neon)">Geo-AI</strong> et à la location intelligence : transformer des données spatiales en décisions.</p>
       <div class="about-langs">
         <span class="lang-badge primary">Arabe — Natif</span>
         <span class="lang-badge primary">Français — Courant</span>
-        <span class="lang-badge">English — Professional</span>
+        <span class="lang-badge">Anglais — Professionnel</span>
       </div>
     </div>
     <div class="about-info-cards">
@@ -534,12 +585,189 @@
       <div class="info-card">
         <div class="info-card-icon">🗺️</div>
         <div class="info-card-title">Spécialité</div>
-        <div class="info-card-value">Sciences Info. Géo.</div>
+        <div class="info-card-value">Sciences de l'Information Géographique</div>
       </div>
       <div class="info-card">
-        <div class="info-card-icon">📞</div>
-        <div class="info-card-title">Téléphone</div>
-        <div class="info-card-value" style="font-size:0.82rem">+212 708-586837</div>
+        <div class="info-card-icon">📊</div>
+        <div class="info-card-title">Focus actuel</div>
+        <div class="info-card-value">Geo-BI &amp; Geo-AI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label">Expérience</div>
+  <h2 class="section-title">Expérience <span>Professionnelle</span></h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <div>
+          <div class="timeline-role">Stage — Application Desktop de Gestion &amp; Impression de Données</div>
+          <div class="timeline-company">Computime · Casablanca</div>
+        </div>
+        <div class="timeline-date">2026</div>
+      </div>
+      <ul class="timeline-list">
+        <li>Conçu et développé une application desktop Python (PySide6) de conception et de gestion de modèles de données destinés à l'impression (tickets, labels, badges), avec une architecture modulaire</li>
+        <li>Modélisé une base de données SQLite structurée (modèles, imprimantes, historique, paramètres) pilotant l'ensemble des flux applicatifs</li>
+        <li>Développé un éditeur visuel par glisser-déposer et un moteur de rendu / impression multi-format (PNG, PDF, Zebra ZPL, ESC/POS, RAW socket) exploitant des champs de données dynamiques</li>
+        <li>Packagé l'application en exécutable Windows avec PyInstaller</li>
+        <li>Rédigé en autonomie le cahier des charges technique et fonctionnel, de l'analyse du besoin à la spécification de l'architecture logicielle</li>
+      </ul>
+      <div class="project-stack" style="margin-top:1.1rem">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">PySide6</span>
+        <span class="stack-tag">SQLite</span>
+        <span class="stack-tag">ZPL / ESC-POS</span>
+        <span class="stack-tag">PyInstaller</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <div>
+          <div class="timeline-role">Stage d'initiation — Développement Full-Stack &amp; SIG</div>
+          <div class="timeline-company">Cité Touristique du Pin · Tafoughalt, Berkane</div>
+        </div>
+        <div class="timeline-date">Juil. – Août 2025</div>
+      </div>
+      <ul class="timeline-list">
+        <li>Développé le backend avec Node.js et Express.js, avec modélisation et gestion de la base de données MongoDB</li>
+        <li>Développé le frontend avec Angular dans une approche full-stack de bout en bout</li>
+        <li>Préparé et traité les données spatiales sous ArcGIS Pro ; export et intégration des couches SIG en GeoJSON</li>
+        <li>Travaillé selon une méthodologie Agile (Scrum), en autonomie sur l'ensemble des livrables techniques</li>
+      </ul>
+      <div class="project-stack" style="margin-top:1.1rem">
+        <span class="stack-tag">Node.js</span>
+        <span class="stack-tag">Express</span>
+        <span class="stack-tag">MongoDB</span>
+        <span class="stack-tag">Angular</span>
+        <span class="stack-tag">ArcGIS Pro</span>
+        <span class="stack-tag">GeoJSON</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="section-label">Projets</div>
+  <h2 class="section-title">Projets Data &amp; <span>Développement</span></h2>
+  <div class="projects-grid">
+    <div class="project-card featured">
+      <div class="project-top">
+        <div class="project-number">PROJET — 01</div>
+        <span class="project-badge live">En cours · 2026</span>
+      </div>
+      <div class="project-title">Location Intelligence Casablanca — Outil Geo-BI d'aide à la décision</div>
+      <ul class="project-list">
+        <li>Cadrage d'un cas d'usage de conseil (implantation retail / bancaire) et collecte de données ouvertes (démographie, POI) avec une démarche de gouvernance documentée</li>
+        <li>Analyse spatiale et scoring des zones à fort potentiel en Python / GeoPandas, restitués dans un dashboard Geo-BI Power BI</li>
+      </ul>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">GeoPandas</span>
+        <span class="stack-tag">PostGIS</span>
+        <span class="stack-tag">Power BI</span>
+        <span class="stack-tag">Azure</span>
+      </div>
+    </div>
+    <div class="project-card featured">
+      <div class="project-top">
+        <div class="project-number">PROJET — 02</div>
+        <span class="project-badge">Académique · 2025</span>
+      </div>
+      <div class="project-title">MedinaLink — Plateforme citoyenne de signalement urbain</div>
+      <ul class="project-list">
+        <li>Application full-stack déployée : signalements géolocalisés (GPS) et classification automatique par intelligence artificielle</li>
+        <li>Assignation automatique aux agents municipaux par ville et catégorie, notifications en temps réel</li>
+        <li>Chaîne CI/CD (GitHub Actions, Docker) et API sécurisée par authentification JWT</li>
+      </ul>
+      <div class="project-stack">
+        <span class="stack-tag">Jakarta EE 10</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">PostgreSQL / PostGIS</span>
+        <span class="stack-tag">FastAPI</span>
+        <span class="stack-tag">Leaflet</span>
+        <span class="stack-tag">Docker</span>
+        <span class="stack-tag">GitHub Actions</span>
+      </div>
+      <div class="project-links">
+        <a class="project-link" href="https://github.com/meryem-souilah/MedinaLink" target="_blank" rel="noopener">Code source ↗</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-number">PROJET — 03</div>
+        <span class="project-badge">Machine Learning</span>
+      </div>
+      <div class="project-title">Air Quality Dashboard — Prédiction de l'AQI</div>
+      <p class="project-desc">Calcul de l'indice de qualité de l'air (seuils EPA) sur 10 000 mesures mondiales, modèle de classification scikit-learn et tableau de bord Streamlit avec graphiques, interprétation et export PDF.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Scikit-learn</span>
+        <span class="stack-tag">Streamlit</span>
+        <span class="stack-tag">Pandas</span>
+      </div>
+      <div class="project-links">
+        <a class="project-link" href="https://github.com/meryem-souilah/ML" target="_blank" rel="noopener">Code source ↗</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-number">PROJET — 04</div>
+        <span class="project-badge">Machine Learning</span>
+      </div>
+      <div class="project-title">Détection d'attaques réseau IoT</div>
+      <p class="project-desc">Analyse exploratoire, prétraitement avancé, entraînement de modèles de Machine Learning et déploiement d'une application de détection d'intrusion sur réseaux IoT.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Scikit-learn</span>
+        <span class="stack-tag">Streamlit</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-number">PROJET — 05</div>
+        <span class="project-badge">Full-Stack</span>
+      </div>
+      <div class="project-title">Plateforme intelligente de gestion du transport public</div>
+      <p class="project-desc">Système multi-couches pour l'optimisation des trajets, le suivi en temps réel et la cartographie SIG, avec API REST et authentification JWT.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Jakarta EE</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">PostgreSQL</span>
+        <span class="stack-tag">JWT</span>
+        <span class="stack-tag">SIG</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-number">PROJET — 06</div>
+        <span class="project-badge">SIG</span>
+      </div>
+      <div class="project-title">Analyse spatiale et cartographie thématique</div>
+      <p class="project-desc">Cartes thématiques, analyses spatiales (zones tampons, intersections, requêtes attributaires et spatiales) et mise en page cartographique professionnelle au format A3.</p>
+      <div class="project-stack">
+        <span class="stack-tag">ArcGIS Pro</span>
+        <span class="stack-tag">QGIS</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-number">PROJET — 07</div>
+        <span class="project-badge">Algorithmique</span>
+      </div>
+      <div class="project-title">Jeu du Moulin en C</div>
+      <p class="project-desc">Jeu de stratégie en console, modes deux joueurs et contre l'ordinateur, avec un code découpé en modules (plateau, joueurs, pions, IA) et la détection des moulins.</p>
+      <div class="project-stack">
+        <span class="stack-tag">C</span>
+        <span class="stack-tag">Algorithmes</span>
+        <span class="stack-tag">Structures de données</span>
+      </div>
+      <div class="project-links">
+        <a class="project-link" href="https://github.com/meryem-souilah/jeu_de_moulin" target="_blank" rel="noopener">Code source ↗</a>
       </div>
     </div>
   </div>
@@ -552,7 +780,7 @@
     <div class="skill-card">
       <div class="skill-card-header">
         <div class="skill-icon">🗺️</div>
-        <div class="skill-card-title">Développement SIG</div>
+        <div class="skill-card-title">Développement &amp; SIG</div>
       </div>
       <div class="skill-tags">
         <span class="skill-tag">ArcGIS Pro</span>
@@ -567,35 +795,52 @@
     </div>
     <div class="skill-card">
       <div class="skill-card-header">
-        <div class="skill-icon">💻</div>
-        <div class="skill-card-title">Développement Web</div>
+        <div class="skill-icon">🌍</div>
+        <div class="skill-card-title">Spatial Data &amp; Geo-BI</div>
       </div>
       <div class="skill-tags">
-        <span class="skill-tag">HTML5 / CSS3</span>
-        <span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">Angular</span>
-        <span class="skill-tag">Vue.js</span>
-        <span class="skill-tag">React</span>
-        <span class="skill-tag">Node.js</span>
-        <span class="skill-tag">Express.js</span>
-        <span class="skill-tag">PHP</span>
-        <span class="skill-tag">Bootstrap</span>
+        <span class="skill-tag">GeoPandas</span>
+        <span class="skill-tag">PostGIS</span>
+        <span class="skill-tag">Spatial Data Quality</span>
+        <span class="skill-tag">Data Gouvernance</span>
+        <span class="skill-tag progress">Spatial Big Data</span>
+        <span class="skill-tag progress">Geo-AI</span>
+        <span class="skill-tag progress">Geo-BI</span>
       </div>
     </div>
     <div class="skill-card">
       <div class="skill-card-header">
-        <div class="skill-icon">⚙️</div>
-        <div class="skill-card-title">Backend & Langages</div>
+        <div class="skill-icon">📊</div>
+        <div class="skill-card-title">Data &amp; Analytics</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">Streamlit</span>
+        <span class="skill-tag progress">Power BI</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">💻</div>
+        <div class="skill-card-title">Développement Web &amp; Logiciel</div>
       </div>
       <div class="skill-tags">
         <span class="skill-tag">Java</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">C / C#</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Angular</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Node.js / Express</span>
         <span class="skill-tag">Spring Boot</span>
-        <span class="skill-tag">Spring AI</span>
         <span class="skill-tag">Jakarta EE</span>
-        <span class="skill-tag">ASP.NET</span>
-        <span class="skill-tag">Django</span>
+        <span class="skill-tag">FastAPI</span>
+        <span class="skill-tag">PySide6</span>
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">C / C#</span>
       </div>
     </div>
     <div class="skill-card">
@@ -608,134 +853,91 @@
         <span class="skill-tag">MySQL</span>
         <span class="skill-tag">Oracle</span>
         <span class="skill-tag">MongoDB</span>
-        <span class="skill-tag">SQL / PL-SQL</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-card-header">
-        <div class="skill-icon">🤖</div>
-        <div class="skill-card-title">Data Science & IA</div>
-      </div>
-      <div class="skill-tags">
-        <span class="skill-tag">Scikit-learn</span>
-        <span class="skill-tag">Machine Learning</span>
-        <span class="skill-tag">Streamlit</span>
-        <span class="skill-tag">IA </span>
-        <span class="skill-tag">Analyse spatiale</span>
+        <span class="skill-tag">SQLite</span>
+        <span class="skill-tag">Modélisation</span>
+        <span class="skill-tag">Optimisation</span>
+        <span class="skill-tag">Administration</span>
       </div>
     </div>
     <div class="skill-card">
       <div class="skill-card-header">
         <div class="skill-icon">🚀</div>
-        <div class="skill-card-title">DevOps & Outils</div>
+        <div class="skill-card-title">Cloud &amp; DevOps</div>
       </div>
       <div class="skill-tags">
-        <span class="skill-tag">Git</span>
         <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Git</span>
         <span class="skill-tag">CI/CD</span>
-        <span class="skill-tag">Apache Tomcat</span>
+        <span class="skill-tag">GitHub Actions</span>
+        <span class="skill-tag">Gestion de serveurs</span>
+        <span class="skill-tag progress">Azure Fundamentals</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon">📐</div>
+        <div class="skill-card-title">Gestion de Projets Data / SIG</div>
+      </div>
+      <div class="skill-tags">
         <span class="skill-tag">Scrum / Agile</span>
-        <span class="skill-tag">IntelliJ</span>
-        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">Cahier des charges</span>
+        <span class="skill-tag progress">GIS Project Management</span>
+        <span class="skill-tag progress">Geodata Project</span>
+        <span class="skill-tag progress">BIM &amp; CIM Fundamentals</span>
       </div>
     </div>
   </div>
-</section>
-
-<section id="projets">
-  <div class="section-label">Projets</div>
-  <h2 class="section-title">Projets <span>Académiques</span></h2>
-  <div class="projects-grid">
-    <div class="project-card">
-      <div class="project-number">PROJET — 01</div>
-      <div class="project-title">Plateforme intelligente de gestion du transport public</div>
-      <p class="project-desc">Système multi-couches pour l'optimisation des trajets, le suivi en temps réel et la cartographie SIG. Architecture complète avec authentification JWT et API REST.</p>
-      <div class="project-stack">
-        <span class="stack-tag">Jakarta EE</span>
-        <span class="stack-tag">React</span>
-        <span class="stack-tag">PostgreSQL</span>
-        <span class="stack-tag">JWT</span>
-        <span class="stack-tag">SIG</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-number">PROJET — 02</div>
-      <div class="project-title">Détection d'attaques réseau IoT par Machine Learning</div>
-      <p class="project-desc">Analyse exploratoire, préprocessing avancé, entraînement de modèles ML et déploiement d'une application de détection d'intrusion sur réseaux IoT.</p>
-      <div class="project-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">Scikit-learn</span>
-        <span class="stack-tag">Streamlit</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-number">PROJET — 03</div>
-      <div class="project-title">Projet SIG — Analyse spatiale et cartographie</div>
-      <p class="project-desc">Création de cartes thématiques, analyses spatiales (buffers, intersections, requêtes) et mise en page cartographique professionnelle au format A3.</p>
-      <div class="project-stack">
-        <span class="stack-tag">ArcGIS Pro</span>
-        <span class="stack-tag">QGIS</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-number">PROJET — 04</div>
-      <div class="project-title">Application Web avec sessions PHP</div>
-      <p class="project-desc">Application web complète avec gestion de panier, sessions utilisateur sécurisées et interface responsive intégrant une API REST.</p>
-      <div class="project-stack">
-        <span class="stack-tag">PHP</span>
-        <span class="stack-tag">Bootstrap 5</span>
-        <span class="stack-tag">API REST</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-number">PROJET — 05</div>
-      <div class="project-title">Jeu du Moulin — Programmation en C</div>
-      <p class="project-desc">Développement d'un jeu de société console avec implémentation complète des algorithmes et structures de données avancées en langage C.</p>
-      <div class="project-stack">
-        <span class="stack-tag">C</span>
-        <span class="stack-tag">Algorithmes</span>
-        <span class="stack-tag">Code::Blocks</span>
-      </div>
-    </div>
+  <div class="soft-skills">
+    <span class="soft-skills-label">Savoir-être</span>
+    <span class="lang-badge">Esprit analytique</span>
+    <span class="lang-badge">Rigueur</span>
+    <span class="lang-badge">Autonomie</span>
+    <span class="lang-badge">Communication</span>
+    <span class="lang-badge">Travail en équipe transverse</span>
   </div>
 </section>
 
-<section id="experience">
-  <div class="section-label">Expérience</div>
-  <h2 class="section-title">Expérience <span>Professionnelle</span></h2>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-meta">
-        <div>
-          <div class="timeline-role">Stage — Développement Full-Stack & SIG</div>
-          <div class="timeline-company">Cité Touristique du Pin · Tafoughalt, Berkane</div>
-        </div>
-        <div class="timeline-date">Juil. – Août 2025</div>
-      </div>
-      <ul class="timeline-list">
-        <li>Développement du backend avec Node.js et Express.js</li>
-        <li>Modélisation et gestion de la base de données MongoDB</li>
-        <li>Développement frontend avec Angular</li>
-        <li>Préparation et traitement des données spatiales sous ArcGIS Pro</li>
-        <li>Export et intégration des couches SIG en GeoJSON</li>
-        <li>Travail selon une méthodologie Agile (Scrum)</li>
-      </ul>
+<section id="formation">
+  <div class="section-label">Formation</div>
+  <h2 class="section-title">Parcours <span>Académique</span></h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-year">2024 — 2027 (PRÉVU)</div>
+      <div class="edu-degree">Cycle d'Ingénieur — Sciences de l'Information Géographique</div>
+      <div class="edu-school">École Hassania des Travaux Publics (EHTP) · Casablanca</div>
+      <div class="edu-topics">Option Geo-Data (S5) : Spatial Big Data · Geo-AI · Spatial Data Quality · Data Governance · Geo-BI · Cadastre &amp; Land Law · Urban Planning · BIM/CIM · GIS Project Management</div>
     </div>
+    <div class="edu-card">
+      <div class="edu-year">2022 — 2024</div>
+      <div class="edu-degree">Classes Préparatoires aux Grandes Écoles (MPSI / MP)</div>
+      <div class="edu-school">Lycée Omar Ibn Abdelaziz · Oujda</div>
+      <div class="edu-topics">Mathématiques · Physique · Informatique</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2021 — 2022</div>
+      <div class="edu-degree">Baccalauréat Scientifique — Sciences Mathématiques</div>
+      <div class="edu-school">Lycée El-Fath · Taourirt</div>
+    </div>
+  </div>
+  <div class="soft-skills">
+    <span class="soft-skills-label">Certificats</span>
+    <span class="lang-badge">Practical Web Development — Udemy</span>
+    <span class="lang-badge">Python &amp; Django Framework — Udemy</span>
+    <span class="lang-badge">Azure Fundamentals — en préparation</span>
   </div>
 </section>
 
 <section id="contact">
   <div class="contact-inner">
     <div class="section-label">Contact</div>
-    <p>Je suis à la recherche d'un stage d'été 2026 dans les domaines du SIG, du développement , AI ou de la data science. N'hésitez pas à me contacter !</p>
+    <h2 class="section-title">Travaillons <span>ensemble</span></h2>
+    <p>Je recherche un <strong>PFE de 6 mois à partir de février 2027</strong> en développement WebGIS, GeoAI ou Geo-BI, au Maroc ou en mobilité en France et en Europe. N'hésitez pas à me contacter.</p>
     <div class="contact-links">
       <a href="mailto:m.meryem.souilah@gmail.com" class="contact-link">✉️ m.meryem.souilah@gmail.com</a>
       <a href="tel:+212708586837" class="contact-link">📞 +212 708-586837</a>
-      <a href="https://www.linkedin.com/in/souilah-meryem" target="_blank" class="contact-link">🔗 LinkedIn</a>
-      <a href="https://github.com/meryem-souilah" target="_blank" class="contact-link">🐙 GitHub</a>
+      <a href="https://www.linkedin.com/in/souilah-meryem" target="_blank" rel="noopener" class="contact-link">🔗 LinkedIn</a>
+      <a href="https://github.com/meryem-souilah" target="_blank" rel="noopener" class="contact-link">🐙 GitHub</a>
     </div>
-    <a href="mailto:m.meryem.souilah@gmail.com" class="btn btn-primary">Envoyer un message</a>
   </div>
 </section>
 
