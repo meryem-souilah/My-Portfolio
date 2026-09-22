@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://meryem-souilah.github.io/My-Portfolio/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300b4a0'/><text x='16' y='22' font-size='16' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>MS</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f4f7fb;
@@ -499,10 +499,77 @@
     .hero-stats { gap: 1.8rem; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
   }
+
+  /* ===== Refresh ===== */
+  :root { --muted: #52697f; --radius: 12px; }
+  body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; counter-reset: sec; }
+  h1, h2, .section-title, .project-title, .timeline-role, .skill-card-title, .edu-degree, .info-card-value { font-family: 'Syne', 'Inter', sans-serif; }
+  ::selection { background: rgba(0,180,160,0.2); }
+
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 101; background: linear-gradient(90deg, var(--neon), var(--neon2)); }
+  nav { transition: box-shadow 0.25s; }
+  nav.scrolled { box-shadow: 0 6px 24px var(--shadow); }
+  nav a { position: relative; }
+  nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--neon); transform: scaleX(0); transition: transform 0.25s; }
+  nav a:hover::after, nav a.active::after { transform: scaleX(1); }
+  nav a.active { color: var(--neon); }
+
+  .hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 3rem; align-items: center; min-height: 92vh; padding-top: 6rem; padding-bottom: 3rem; }
+  .hero-desc { max-width: 540px; }
+  .hero-visual { position: relative; opacity: 0; animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-visual svg { display: block; width: 100%; max-width: 520px; height: auto; margin-left: auto; filter: drop-shadow(0 24px 48px rgba(0,100,150,0.12)); }
+  .map-chip { position: absolute; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 0.55rem 0.85rem; font-family: 'Space Mono', monospace; font-size: 0.66rem; line-height: 1.6; color: var(--text); box-shadow: 0 10px 30px rgba(0,100,150,0.12); white-space: nowrap; }
+  .map-chip strong { color: var(--neon2); font-weight: 700; }
+  .map-chip .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--neon); margin-right: 0.45rem; vertical-align: middle; }
+  .chip-a { top: 12%; left: -4%; }
+  .chip-b { bottom: 18%; right: -2%; }
+  .chip-c { bottom: -2%; left: 10%; color: var(--neon); }
+
+  .hero-stats { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 1.4rem 0; }
+  .stat-label { white-space: nowrap; }
+  .stat-item { padding: 0 2rem; border-left: 1px solid var(--border); }
+  .stat-item:first-child { padding-left: 0; border-left: 0; }
+
+  .section-label::before { counter-increment: sec; content: counter(sec, decimal-leading-zero) '  /  '; color: var(--neon2); }
+  .btn { border-radius: 8px; }
+  .skill-tag, .stack-tag, .lang-badge, .project-badge, .timeline-date { border-radius: 6px; }
+
+  .ic { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .skill-icon, .info-card-icon { color: var(--neon); }
+  .info-card-icon { width: 38px; height: 38px; border-radius: 8px; background: rgba(0,180,160,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 0.9rem; }
+  .info-card { background: var(--card); border-radius: var(--radius); }
+  .contact-link .ic { width: 16px; height: 16px; }
+
+  .skill-card, .edu-card, .timeline-item { border-radius: var(--radius); }
+  .project-card { border-radius: 14px; }
+  .project-card.featured { background: linear-gradient(180deg, rgba(0,180,160,0.06), var(--card) 45%); }
+  .timeline-item:hover { box-shadow: 0 10px 32px var(--shadow); }
+
+  #contact .contact-inner { max-width: 880px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 3.5rem 2.5rem; box-shadow: 0 20px 60px var(--shadow); position: relative; overflow: hidden; }
+  #contact .contact-inner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--neon), var(--neon2), var(--neon3)); }
+  #contact .contact-inner p { margin-bottom: 2rem; }
+  #contact .contact-links { margin-bottom: 0; }
+  .contact-link { border-radius: 8px; color: var(--text); }
+
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-visual { display: none; }
+  }
+  @media (max-width: 768px) {
+    .hero-stats { grid-template-columns: repeat(2, auto); }
+    .stat-item { padding: 0 1.4rem; }
+    .stat-item:nth-child(odd) { padding-left: 0; border-left: 0; }
+    #contact .contact-inner { padding: 2.5rem 1.2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .hero h1, .hero-desc, .hero-actions, .hero-stats, .hero-visual { opacity: 1 !important; }
+  }
 </style>
 </head>
 <body>
 
+<div id="progress"></div>
 <nav>
   <div class="nav-logo">SOUILAH MERYEM<span>.portfolio</span></div>
   <ul>
@@ -518,9 +585,6 @@
 <section class="hero" id="accueil">
   <div class="hero-blob"></div>
   <div class="hero-blob2"></div>
-  <div class="geo geo1"></div>
-  <div class="geo geo2"></div>
-  <div class="geo geo3"></div>
 
   <div class="hero-content">
     <div class="hero-tag">PFE de 6 mois · disponible dès février 2027</div>
@@ -555,6 +619,38 @@
       </div>
     </div>
   </div>
+
+  <div class="hero-visual" aria-hidden="true">
+    <svg viewBox="0 0 480 440">
+      <defs>
+        <linearGradient id="hv-route" x1="0" x2="1"><stop offset="0" stop-color="#00b4a0"/><stop offset="1" stop-color="#5b3fff"/></linearGradient>
+        <pattern id="hv-grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0v32" fill="none" stroke="#d4e0ec" stroke-width="1"/></pattern>
+      </defs>
+      <rect x="10" y="10" width="460" height="420" rx="22" fill="#ffffff" stroke="#d4e0ec"/>
+      <rect x="10" y="10" width="460" height="420" rx="22" fill="url(#hv-grid)" opacity=".7"/>
+      <g fill="none" stroke="#00b4a0" stroke-opacity=".28" stroke-width="1.4">
+        <path d="M60 330c40-60 120-80 170-60s110 10 150-40 50-120 20-160"/>
+        <path d="M90 350c35-45 100-60 140-45s95 8 130-32 40-95 15-128"/>
+        <path d="M125 365c28-30 80-42 110-32s75 6 102-24 30-70 12-95"/>
+        <path d="M165 375c20-18 55-26 76-20s52 4 70-16 20-45 8-62"/>
+      </g>
+      <g fill="#5b3fff" fill-opacity=".06" stroke="#5b3fff" stroke-opacity=".35" stroke-width="1.2">
+        <path d="M58 70h96l14 64-86 22-32-40z"/>
+        <path d="M168 60h92l-6 70-72 6z"/>
+        <path d="M82 170l86-18 20 78-94 16z"/>
+      </g>
+      <path d="M70 380C130 330 150 250 210 230s120 20 160-40 40-110 70-130" fill="none" stroke="url(#hv-route)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 9"/>
+      <circle cx="210" cy="230" r="22" fill="#00b4a0" fill-opacity=".12"/>
+      <circle cx="210" cy="230" r="7" fill="#00b4a0"/>
+      <circle cx="370" cy="190" r="6" fill="#5b3fff"/>
+      <circle cx="440" cy="60" r="6" fill="#ff3d7f"/>
+      <circle cx="70" cy="380" r="6" fill="#00b4a0"/>
+      <circle cx="300" cy="300" r="4" fill="#6b88a0"/><circle cx="330" cy="330" r="4" fill="#6b88a0"/><circle cx="270" cy="345" r="4" fill="#6b88a0"/>
+    </svg>
+    <div class="map-chip chip-a"><span class="dot"></span>33.5731° N · 7.5898° W</div>
+    <div class="map-chip chip-b"><strong>Couches</strong><br>▣ Parcelles · ◌ Isolignes · ⋯ Itinéraire</div>
+    <div class="map-chip chip-c">PostGIS · GeoPandas · Leaflet</div>
+  </div>
 </section>
 
 <section id="apropos">
@@ -572,17 +668,17 @@
     </div>
     <div class="about-info-cards">
       <div class="info-card">
-        <div class="info-card-icon">📍</div>
+        <div class="info-card-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
         <div class="info-card-title">Localisation</div>
         <div class="info-card-value">Casablanca, Maroc</div>
       </div>
       <div class="info-card">
-        <div class="info-card-icon">🎓</div>
+        <div class="info-card-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
         <div class="info-card-title">École</div>
         <div class="info-card-value">EHTP Casablanca</div>
       </div>
       <div class="info-card" style="grid-column:1 / -1">
-        <div class="info-card-icon">🗺️</div>
+        <div class="info-card-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></div>
         <div class="info-card-title">Spécialité</div>
         <div class="info-card-value">Sciences de l'Information Géographique</div>
       </div>
@@ -773,7 +869,7 @@
   <div class="skills-grid">
     <div class="skill-card">
       <div class="skill-card-header">
-        <div class="skill-icon">🗺️</div>
+        <div class="skill-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></div>
         <div class="skill-card-title">Développement &amp; SIG</div>
       </div>
       <div class="skill-tags">
@@ -789,7 +885,7 @@
     </div>
     <div class="skill-card">
       <div class="skill-card-header">
-        <div class="skill-icon">🌍</div>
+        <div class="skill-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg></div>
         <div class="skill-card-title">Spatial Data &amp; Geo-BI</div>
       </div>
       <div class="skill-tags">
@@ -804,7 +900,7 @@
     </div>
     <div class="skill-card">
       <div class="skill-card-header">
-        <div class="skill-icon">📊</div>
+        <div class="skill-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M21 20H3"/></svg></div>
         <div class="skill-card-title">Data &amp; Analytics</div>
       </div>
       <div class="skill-tags">
@@ -820,7 +916,7 @@
     </div>
     <div class="skill-card">
       <div class="skill-card-header">
-        <div class="skill-icon">💻</div>
+        <div class="skill-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg></div>
         <div class="skill-card-title">Développement Web &amp; Logiciel</div>
       </div>
       <div class="skill-tags">
@@ -839,7 +935,7 @@
     </div>
     <div class="skill-card">
       <div class="skill-card-header">
-        <div class="skill-icon">🗄️</div>
+        <div class="skill-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div>
         <div class="skill-card-title">Bases de Données</div>
       </div>
       <div class="skill-tags">
@@ -855,7 +951,7 @@
     </div>
     <div class="skill-card">
       <div class="skill-card-header">
-        <div class="skill-icon">🚀</div>
+        <div class="skill-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18a5 5 0 1 1 .9-9.9A6 6 0 0 1 19 10a4 4 0 0 1 0 8H7z"/></svg></div>
         <div class="skill-card-title">Cloud &amp; DevOps</div>
       </div>
       <div class="skill-tags">
@@ -869,7 +965,7 @@
     </div>
     <div class="skill-card">
       <div class="skill-card-header">
-        <div class="skill-icon">📐</div>
+        <div class="skill-icon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8v8M12 8v5M16 8v10"/></svg></div>
         <div class="skill-card-title">Gestion de Projets Data / SIG</div>
       </div>
       <div class="skill-tags">
@@ -925,12 +1021,12 @@
   <div class="contact-inner">
     <div class="section-label">Contact</div>
     <h2 class="section-title">Travaillons <span>ensemble</span></h2>
-    <p>Je recherche un <strong>PFE de 6 mois à partir de février 2027</strong> en développement WebGIS, GeoAI ou Geo-BI, au Maroc ou en mobilité en France et en Europe. N'hésitez pas à me contacter.</p>
+    <p>Je recherche un <strong>PFE de 6 mois à partir de février 2027</strong>.</p>
     <div class="contact-links">
-      <a href="mailto:m.meryem.souilah@gmail.com" class="contact-link">✉️ m.meryem.souilah@gmail.com</a>
-      <a href="tel:+212708586837" class="contact-link">📞 +212 708-586837</a>
-      <a href="https://www.linkedin.com/in/souilah-meryem" target="_blank" rel="noopener" class="contact-link">🔗 LinkedIn</a>
-      <a href="https://github.com/meryem-souilah" target="_blank" rel="noopener" class="contact-link">🐙 GitHub</a>
+      <a href="mailto:m.meryem.souilah@gmail.com" class="contact-link"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>m.meryem.souilah@gmail.com</a>
+      <a href="tel:+212708586837" class="contact-link"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>+212 708-586837</a>
+      <a href="https://www.linkedin.com/in/souilah-meryem" target="_blank" rel="noopener" class="contact-link"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>LinkedIn</a>
+      <a href="https://github.com/meryem-souilah" target="_blank" rel="noopener" class="contact-link"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>GitHub</a>
     </div>
   </div>
 </section>
@@ -951,7 +1047,8 @@
     });
   }, { threshold: 0.08 });
 
-  document.querySelectorAll('.skill-card, .project-card, .timeline-item, .edu-card, .info-card').forEach((el, i) => {
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion) document.querySelectorAll('.skill-card, .project-card, .timeline-item, .edu-card, .info-card').forEach((el, i) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
     el.style.transition = `opacity 0.5s ${i * 0.05}s ease, transform 0.5s ${i * 0.05}s ease, border-color 0.22s, box-shadow 0.22s`;
@@ -964,7 +1061,10 @@
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) current = s.id; });
-    navLinks.forEach(a => { a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--neon)' : ''; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${current}`));
+    const max = document.documentElement.scrollHeight - innerHeight;
+    document.getElementById('progress').style.width = (max > 0 ? scrollY / max * 100 : 0) + '%';
+    document.querySelector('nav').classList.toggle('scrolled', scrollY > 10);
   });
 </script>
 </body>
